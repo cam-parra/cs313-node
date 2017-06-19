@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+<body>
+  <form action="/math" id="calc" method="get">
+    <input type="number" name="numero1" placeholder="number">
+    <select class="" name="operator">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <input type="number" name="numero2" placeholder="number">
+    =
+    <input type="submit" value="do math">
+  </form>
+  <br>
+  <%=
+  document.getElementById("calc").addEventListener("submit", add_el);
+  var stuff = {  };
+  function add_el () {
+    stuff.push(results);
+  }
+  stuff
+  %>
+</body>
+</html>

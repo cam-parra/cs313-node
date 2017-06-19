@@ -1,0 +1,61 @@
+
+.login-form {
+  width:5080px;
+}
+
+
+.signup-form{
+  width: 600px;
+}
+
+.input-field{
+  margin-top:100;
+}
+
+.login-form-text{
+  text-transform:uppercase;
+  letter-spacing:2px;
+  font-size:0.8rem;
+}
+
+.circle{
+  -moz-border-radius:50px;
+  -webkit-border-radius:50px;
+  border-radius:50px;
+  border:2px solid #999;
+  padding:3px;
+  display:block
+}
+
+
+main {
+  flex: 1 0 auto;
+}
+
+.container  {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.container .row {
+  margin: 0 auto;
+}
+
+
+
+html,
+body {
+    height: 100%;
+}
+html {
+    display: table;
+    margin: auto;
+}
+body {
+    display: table-cell;
+    vertical-align: middle;
+}

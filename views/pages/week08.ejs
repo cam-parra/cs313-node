@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include ../partials/header.ejs %>
+</head>
+<body>
+
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Mailing Price Tool</h1>
+      <p>Please input the weight and type of mail to find the price.</p>
+    </div>
+  </div>
+  <div class="container">
+    <form action="/mail" method="get">
+      <label for="weight">Weight</label>
+      <input type="text" class="form-control" id="weight" name="weight" aria-describedby="weighthelp" placeholder="ounces">
+      <small id="weighthelp" class="form-text text-muted">In ounces please.</small>
+      <br>
+      <label for="mailtype">Mail type</label>
+      <select class="form-control" id="mailtype" name="mailtype">
+        <option value="lstmp">Letters(stamped)</option>
+        <option value="lmetd">Letters (Metered)</option>
+        <option value="lrgenv">Large Envelopes (Flats)</option>
+        <option value="para">Parcels</option>
+      </select>
+      <br>
+      <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <% if (typeof result != 'undefined' ) { %>
+  <div class="jumbotron"><h1>your total is $ <%= result %></h1></div>
+<% } %>
+  </div>
+
+
+<%# <i class="material-icons prefix">phone</i>
+<input type="text" id="weight" name="weight">
+<label for="weight">weight</label>
+<select class="" name="mailtype">
+  <option value="lstmp">Letters(stamped)</option>
+  <option value="lmetd">Letters (Metered)</option>
+  <option value="lrgenv">Large Envelopes (Flats)</option>
+  <option value="para">Parcels</option>
+</select>
+<input type="submit" value="submit">%>
+
+
+</body>
+</html>
