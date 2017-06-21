@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/header.ejs %>
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1>Family History Tool</h1>
+    </div>
+  </div>
+  <div class="container">
+    <form action="/stuff" method="get">
+      <label for="userid">User Id</label>
+      <input type="text" id="userid" name="userid" placeholder="num">
+      <input type="submit" name="submit" value="expand">
+    </form>
+  </div>
+
+</body>
+</html>

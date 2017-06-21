@@ -1,5 +1,8 @@
 var express = require( 'express' );
+var pg      = require('pg');
 var app     = express(  );
+
+var server = 'postgres://postgres:mystuff@localhost:5432/person';
 
 app.set( 'port', ( process.env.PORT || 5000 ) );
 
@@ -10,40 +13,69 @@ app.set( 'views', __dirname + '/views' );
 app.set( 'view engine', 'ejs' );
 
 app.get( '/', function( request, response ) {
-  response.render ('pages/week08');
+  response.render ('pages/week09' );
 } );
-app.get( '/mail', function( request, response ) {
-  var weight = Number(request.query.weight), mtype = request.query.mailtype;
-  function get_price( weight, mailtype ) {
 
-    var letter_stamped = { "1": 0.49, "2": 0.70, "3": 0.91, "3.5": 1.12 } ;
-    var letter_metered = { "1": 0.46, "2": 0.67, "3": 0.88, "3.5": 1.09 } ;
-    var chunky_mail    = { "1": 0.98, "2": 1.19, "3": 1.40, "4": 1.61, "5":1.82,
-    "6":2.03, "7":2.24, "8":2.45, "9":2.66, "10":2.87, "11":3.08,"12":3.29 ,"13":3.50};
-    var parcels        = {"1": 2.67, "2": 2.67, "3": 2.67, "4": 2.67, "5":2.85,
-    "6":3.03, "7":3.21, "8":3.39, "9":3.57, "10":3.75, "11":3.93,"12":4.11 ,"13":4.29};
-    var result = {};
-    if ( mailtype === "lstmp"){
-      result = Object.keys(letter_stamped).filter(function (key) { return (Number(key) <= weight);});
-      return letter_stamped[result[result.length - 1]];
-    }else if (mailtype === "lmetd") {
-      result = Object.keys(letter_metered).filter(function (key) { return (Number(key) <= weight);});
-      return letter_metered[result[result.length - 1]];
-    }else if (mailtype === "lrgenv") {
-      result = Object.keys(chunky_mail).filter(function (key) { return (Number(key) <= weight);});
-      return chunky_mail[result[result.length - 1]];
-    }else if (mailtype === "para") {
-      result = Object.keys(parcels).filter(function (key) { return (Number(key) <= weight);});
-      return parcels[result[result.length - 1]];
+function display( req, res) {
+
+  var id = req.query.userid;
+
+
+  get_person_db( id, function (err, result) {
+    if (err || result == null || result.length != 1) {
+			res.status(500).json({success: false, data: err});
+		} else {
+			var person = result[0];
+			res.status(200).json(result[0]);
+		}
+
+  } );
+
+
+
+}
+
+function get_person_db( id, callback ) {
+
+
+  console.log("Getting person from DB with id: " + id);
+
+  var client = new pg.Client( server );
+
+  client.connect ( function ( err ) {
+
+
+    if ( err ) {
+      console.log(err);
+      callback(err, null);
     }
 
+    var sql = "SELECT id, first, last, birthdate FROM persons WHERE id = $1::int";
+    var params = [id];
 
-  }
-  console.log(weight, mtype);
-  var results = get_price(weight, mtype );
-  console.log(results);
+		var query = client.query(sql, params, function(err, result) {
 
-  response.render( 'pages/week08', { result: results.toPrecision(2)} );
+			client.end(function(err) {
+				if (err) throw err;
+			});
+      //response.render( 'pages/week09', { result: res.rows } );
+
+			//console.log(JSON.stringify(res.rows));
+
+			callback(null, result.rows);
+		});
+  });
+}
+
+
+
+app.get( '/stuff', function( request, response ) {
+
+
+
+  display(request, response);
+
+
 
 });
 
