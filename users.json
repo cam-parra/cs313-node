@@ -1,0 +1,15 @@
+{
+	"username" : "testuser1",
+	"email" : "testuser1@testdomain.com",
+	"password-hash" : "abcDhashquw"
+},
+{
+	"username" : "testuserw",
+	"email" : "testuserw@testdomain.com",
+	"password-hash" : "abcDhashquwsjshssjs"
+},
+{
+	"username" : "testuser3",
+	"email" : "testuser4@testdomain.com",
+	"password-hash" : "abcDhashquwsajashdusa"
+}
