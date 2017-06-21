@@ -2,7 +2,7 @@ var express = require( 'express' );
 var pg      = require('pg');
 var app     = express(  );
 
-var server = 'postgres://postgres:mystuff@localhost:5432/person';
+var server = 'postgres://nuavpcnyzyktqt:485861e8bbf2bfa55bb4d3ea91ef7a6e5cec39035fce3568bde985e03d12c07b@ec2-184-73-167-43.compute-1.amazonaws.com:5432/dbo04u53n9aac9';
 
 app.set( 'port', ( process.env.PORT || 5000 ) );
 
